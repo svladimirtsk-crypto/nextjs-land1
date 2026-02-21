@@ -1,833 +1,1014 @@
-import type { Metadata } from "next";
+"use client";
 
-export const metadata: Metadata = {
-  title: "Очное обучение маникюру в Москве — Елена (Paris Nail)",
-  description:
-    "2 курса: 7 дней «Топ-мастер маникюра» и 1 день «Повышение квалификации». Жёсткий гель, архитектура, опил после материала. Москва, Берёзовая аллея 7Б.",
-};
+import { useState } from "react";
 
-const VK_LINK = "https://vk.me/yourcommunity";
+export default function Home() {
+  const [menuOpen, setMenuOpen] = useState(false);
+  const vkLink = "https://vk.me/yourcommunity";
 
-const nav = [
-  { label: "Курсы", href: "#courses" },
-  { label: "Техника", href: "#tech" },
-  { label: "Инструктор", href: "#instructor" },
-  { label: "Отзывы", href: "#reviews" },
-  { label: "FAQ", href: "#faq" },
-  { label: "Адрес", href: "#location" },
-];
-
-const courses = [
-  {
-    tag: "Очный курс",
-    title: '7 дней — «Топ-мастер маникюра»',
-    price: "45 000 ₽",
-    forWhom: "Для мастеров, которые хотят системно вырасти в технике, форме и уверенности.",
-    bullets: [
-      "Жёсткий гель и стабильная архитектура",
-      "Опил формы ПОСЛЕ материала (правильная последовательность)",
-      "Прочность свободного края и носибельность",
-      "Чистота формы: боковые, торец, апекс",
-      "Разбор ошибок и отработка на практике",
-    ],
-    accent: "from-violet-500/30 via-fuchsia-500/20 to-sky-500/20",
-  },
-  {
-    tag: "Интенсив",
-    title: "1 день — «Повышение квалификации»",
-    price: "10 000 ₽",
-    forWhom: "Для действующих мастеров: быстро подтянуть опил, форму и качество результата.",
-    bullets: [
-      "Опил после материала: логика и контроль формы",
-      "Архитектура под носку, без «мягких костылей»",
-      "Свободный край: жёсткость и стабильность",
-      "Чистые линии: торец, боковые, симметрия",
-      "Точечный разбор ваших ошибок",
-    ],
-    accent: "from-sky-500/25 via-violet-500/20 to-fuchsia-500/20",
-  },
-];
-
-const features = [
-  {
-    title: "Жёсткий материал = форма держится",
-    text: "Гель — не «мягкая история». Он держит архитектуру и делает результат стабильным.",
-  },
-  {
-    title: "Сначала материал → потом опил",
-    text: "Современная последовательность: выстраиваем, затем доводим форму — так носка сильнее.",
-  },
-  {
-    title: "Свободный край становится крепче",
-    text: "Правильная форма + опил после материала дают жёсткость там, где чаще всего ломается.",
-  },
-  {
-    title: "Архитектура как у «дорогих» работ",
-    text: "Апекс, торец, боковые — вы начинаете контролировать силуэт, а не «маскировать».",
-  },
-  {
-    title: "Меньше зависимость от мягких баз",
-    text: "Когда архитектура стоит на жёстком материале, у вас больше уверенности в результате.",
-  },
-  {
-    title: "Очный формат = быстрый рост",
-    text: "Практика, постановка рук, мгновенная корректировка — то, чего не даст видеоурок.",
-  },
-];
-
-const steps = [
-  {
-    title: "Диагностика и цели",
-    text: "Смотрим ваш уровень, типичные ошибки и задачи: форма, носка, скорость, чистота.",
-  },
-  {
-    title: "Постановка техники",
-    text: "Выкладка жёсткого геля, архитектура, контроль толщины и логика работы по шагам.",
-  },
-  {
-    title: "Опил после материала",
-    text: "Доводим форму: торец, боковые, апекс. Вы учитесь делать «собранный» силуэт.",
-  },
-  {
-    title: "Финиш и стандарты качества",
-    text: "Как оценивать результат, чтобы он был стабильным и выглядел профессионально.",
-  },
-];
-
-const reviews = [
-  {
-    name: "Ученица (повышение)",
-    text: "Наконец-то поняла, как делать опил после материала — форма стала ровнее, а носка стабильнее.",
-  },
-  {
-    name: "Мастер из салона",
-    text: "Разобрали ошибки по архитектуре. Теперь не «докладываю базу», а строю форму правильно.",
-  },
-  {
-    name: "Ученица (7 дней)",
-    text: "Очень много практики. После курса почувствовала уверенность — руки начали делать «дорогой» результат.",
-  },
-  {
-    name: "Мастер 2+ года",
-    text: "Сильнее всего зашло про свободный край: раньше часто были сколы, сейчас результат заметно крепче.",
-  },
-  {
-    name: "Ученица",
-    text: "Понравилась подача: по делу, без воды, с контролем каждого шага. Рекомендую очно.",
-  },
-  {
-    name: "Мастер",
-    text: "Городская школа с нормальным уровнем: чисто, структурно, современно. Забрала схему работы в голову.",
-  },
-];
-
-const faqs = [
-  {
-    q: "Где проходит обучение?",
-    a: "Москва, Берёзовая аллея 7Б. После записи пришлю ориентиры и как добраться.",
-  },
-  {
-    q: "Какие курсы доступны?",
-    a: "2 формата: 7 дней «Топ-мастер маникюра» — 45 000 ₽ и 1 день «Повышение квалификации» — 10 000 ₽.",
-  },
-  {
-    q: "В чём главная идея техники?",
-    a: "Работа жёстким гелем и правильная последовательность: сначала выстраиваем материал, затем делаем опил формы. Это даёт архитектуру и носибельность.",
-  },
-  {
-    q: "Кому подойдёт 1 день повышения?",
-    a: "Действующим мастерам, которые хотят быстро улучшить форму, архитектуру и чистоту опила.",
-  },
-  {
-    q: "Как записаться?",
-    a: "Нажмите «Записаться» и напишите в VK слово «КУРС». Отправлю программу и варианты дат.",
-  },
-];
-
-function clsx(...classes: Array<string | false | undefined | null>) {
-  return classes.filter(Boolean).join(" ");
-}
-
-function SectionTitle(props: { eyebrow?: string; title: string; text?: string }) {
   return (
-    <div className="mx-auto mb-8 max-w-3xl text-center">
-      {props.eyebrow ? (
-        <div className="mb-3 inline-flex items-center gap-2 rounded-full border border-white/15 bg-white/5 px-4 py-2 text-xs font-medium tracking-wide text-white/80 backdrop-blur">
-          <span className="inline-block h-1.5 w-1.5 rounded-full bg-violet-300" />
-          {props.eyebrow}
-        </div>
-      ) : null}
-      <h2 className="text-balance text-3xl font-semibold tracking-tight text-white md:text-4xl">
-        {props.title}
-      </h2>
-      {props.text ? (
-        <p className="mt-3 text-pretty text-base leading-relaxed text-white/75 md:text-lg">
-          {props.text}
-        </p>
-      ) : null}
-    </div>
-  );
-}
-
-function GlowBG() {
-  return (
-    <>
-      <div className="pointer-events-none absolute -left-24 -top-28 h-80 w-80 rounded-full bg-violet-500/25 blur-3xl" />
-      <div className="pointer-events-none absolute right-0 top-24 h-96 w-96 rounded-full bg-fuchsia-500/15 blur-3xl" />
-      <div className="pointer-events-none absolute bottom-0 left-1/3 h-96 w-96 rounded-full bg-sky-500/15 blur-3xl" />
-    </>
-  );
-}
-
-export default function Page() {
-  return (
-    <div className="min-h-screen bg-[#070713] text-white">
-      {/* subtle city/grid texture */}
-      <div className="pointer-events-none fixed inset-0 opacity-[0.22] mix-blend-screen">
-        <div className="absolute inset-0 bg-[radial-gradient(circle_at_20%_10%,rgba(167,139,250,0.35),transparent_35%),radial-gradient(circle_at_80%_30%,rgba(56,189,248,0.22),transparent_35%),radial-gradient(circle_at_50%_90%,rgba(232,121,249,0.18),transparent_45%)]" />
-        <div className="absolute inset-0 bg-[linear-gradient(to_right,rgba(255,255,255,0.06)_1px,transparent_1px),linear-gradient(to_bottom,rgba(255,255,255,0.06)_1px,transparent_1px)] bg-[size:34px_34px]" />
+    <div className="min-h-screen bg-gray-950 text-gray-100 overflow-x-hidden">
+      {/* Background decorative shapes */}
+      <div className="fixed inset-0 pointer-events-none z-0 overflow-hidden">
+        <div className="absolute -top-40 -left-40 w-[600px] h-[600px] rounded-full bg-violet-600/20 blur-[120px]" />
+        <div className="absolute top-1/3 -right-60 w-[500px] h-[500px] rounded-full bg-fuchsia-500/15 blur-[100px]" />
+        <div className="absolute bottom-0 left-1/4 w-[700px] h-[400px] rounded-full bg-indigo-600/10 blur-[130px]" />
+        <div className="absolute top-2/3 right-1/4 w-[300px] h-[300px] rounded-full bg-purple-500/10 blur-[80px]" />
       </div>
 
-      {/* Header */}
-      <header className="sticky top-0 z-50 border-b border-white/10 bg-[#070713]/70 backdrop-blur">
-        <div className="mx-auto flex max-w-6xl items-center justify-between gap-4 px-4 py-3 md:px-6">
-          <a href="#" className="group flex items-center gap-3">
-            <div className="relative grid h-10 w-10 place-items-center rounded-2xl bg-gradient-to-br from-violet-500/35 via-fuchsia-500/25 to-sky-500/25 ring-1 ring-white/15">
-              <span className="text-sm font-semibold tracking-tight">EN</span>
-              <span className="pointer-events-none absolute inset-0 rounded-2xl opacity-0 ring-2 ring-violet-300/40 transition group-hover:opacity-100" />
+      {/* Sticky Header */}
+      <header className="sticky top-0 z-50 backdrop-blur-xl bg-gray-950/70 border-b border-violet-500/20">
+        <div className="max-w-7xl mx-auto px-4 py-3 flex items-center justify-between">
+          <div className="flex items-center gap-2">
+            <div className="w-9 h-9 rounded-lg bg-gradient-to-br from-violet-500 to-fuchsia-500 flex items-center justify-center text-white font-bold text-sm">
+              NM
             </div>
-            <div className="leading-tight">
-              <div className="text-sm font-semibold tracking-tight">Елена • Paris Nail</div>
-              <div className="text-xs text-white/60">Очное обучение • Москва</div>
+            <div className="hidden sm:block">
+              <span className="font-bold text-lg bg-gradient-to-r from-violet-300 to-fuchsia-300 bg-clip-text text-transparent">
+                Nail Master
+              </span>
+              <span className="text-xs text-gray-400 block -mt-1">
+                Школа маникюра · Москва
+              </span>
             </div>
-          </a>
+            <span className="sm:hidden font-bold text-lg bg-gradient-to-r from-violet-300 to-fuchsia-300 bg-clip-text text-transparent">
+              Nail Master
+            </span>
+          </div>
 
-          <nav className="hidden items-center gap-1 md:flex">
-            {nav.map((item) => (
-              <a
-                key={item.href}
-                href={item.href}
-                className="rounded-xl px-3 py-2 text-sm text-white/75 transition hover:bg-white/5 hover:text-white"
-              >
-                {item.label}
-              </a>
-            ))}
+          {/* Desktop nav */}
+          <nav className="hidden lg:flex items-center gap-6 text-sm text-gray-300">
+            <a href="#courses" className="hover:text-violet-300 transition-colors">
+              Курсы
+            </a>
+            <a href="#technique" className="hover:text-violet-300 transition-colors">
+              Техника
+            </a>
+            <a href="#instructor" className="hover:text-violet-300 transition-colors">
+              Инструктор
+            </a>
+            <a href="#process" className="hover:text-violet-300 transition-colors">
+              Обучение
+            </a>
+            <a href="#reviews" className="hover:text-violet-300 transition-colors">
+              Отзывы
+            </a>
+            <a href="#faq" className="hover:text-violet-300 transition-colors">
+              FAQ
+            </a>
+            <a href="#location" className="hover:text-violet-300 transition-colors">
+              Локация
+            </a>
           </nav>
 
-          <div className="flex items-center gap-2">
+          <div className="flex items-center gap-3">
             <a
-              href="#courses"
-              className="hidden rounded-xl border border-white/15 bg-white/5 px-4 py-2 text-sm font-medium text-white/85 backdrop-blur transition hover:bg-white/10 md:inline-flex"
-            >
-              Курсы и цены
-            </a>
-            <a
-              href={VK_LINK}
-              className="inline-flex items-center justify-center rounded-xl bg-gradient-to-r from-violet-500 to-fuchsia-500 px-4 py-2 text-sm font-semibold text-white shadow-[0_10px_30px_rgba(167,139,250,0.25)] transition hover:brightness-110"
+              href={vkLink}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="hidden md:inline-flex px-5 py-2 rounded-full bg-gradient-to-r from-violet-600 to-fuchsia-600 text-white text-sm font-semibold hover:from-violet-500 hover:to-fuchsia-500 transition-all shadow-lg shadow-violet-500/25"
             >
               Записаться
             </a>
+
+            {/* Mobile menu button */}
+            <button
+              onClick={() => setMenuOpen(!menuOpen)}
+              className="lg:hidden p-2 rounded-lg hover:bg-violet-500/10 transition-colors"
+              aria-label="Меню"
+            >
+              <svg
+                className="w-6 h-6"
+                fill="none"
+                stroke="currentColor"
+                viewBox="0 0 24 24"
+              >
+                {menuOpen ? (
+                  <path
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                    strokeWidth={2}
+                    d="M6 18L18 6M6 6l12 12"
+                  />
+                ) : (
+                  <path
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                    strokeWidth={2}
+                    d="M4 6h16M4 12h16M4 18h16"
+                  />
+                )}
+              </svg>
+            </button>
           </div>
         </div>
 
-        {/* mobile nav */}
-        <div className="md:hidden">
-          <div className="no-scrollbar flex gap-2 overflow-x-auto border-t border-white/10 px-4 py-2">
-            {nav.map((item) => (
+        {/* Mobile nav dropdown */}
+        {menuOpen && (
+          <div className="lg:hidden backdrop-blur-xl bg-gray-950/90 border-t border-violet-500/20 px-4 py-4">
+            <nav className="flex flex-col gap-3 text-sm text-gray-300">
+              {[
+                ["#courses", "Курсы"],
+                ["#technique", "Техника"],
+                ["#instructor", "Инструктор"],
+                ["#process", "Обучение"],
+                ["#reviews", "Отзывы"],
+                ["#faq", "FAQ"],
+                ["#location", "Локация"],
+              ].map(([href, label]) => (
+                <a
+                  key={href}
+                  href={href}
+                  onClick={() => setMenuOpen(false)}
+                  className="py-2 px-3 rounded-lg hover:bg-violet-500/10 hover:text-violet-300 transition-colors"
+                >
+                  {label}
+                </a>
+              ))}
               <a
-                key={item.href}
-                href={item.href}
-                className="whitespace-nowrap rounded-full border border-white/10 bg-white/5 px-3 py-1.5 text-xs text-white/80 backdrop-blur"
+                href={vkLink}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="mt-2 text-center py-3 rounded-full bg-gradient-to-r from-violet-600 to-fuchsia-600 text-white font-semibold"
               >
-                {item.label}
+                Записаться
               </a>
-            ))}
+            </nav>
           </div>
-        </div>
+        )}
       </header>
 
       {/* Hero */}
-      <section className="relative overflow-hidden">
-        <GlowBG />
-        <div className="mx-auto grid max-w-6xl grid-cols-1 items-center gap-10 px-4 py-14 md:grid-cols-2 md:px-6 md:py-20">
+      <section className="relative z-10 max-w-7xl mx-auto px-4 pt-16 pb-20 md:pt-24 md:pb-28">
+        <div className="grid lg:grid-cols-2 gap-12 items-center">
           <div>
-            <div className="inline-flex items-center gap-2 rounded-full border border-white/15 bg-white/5 px-4 py-2 text-xs font-medium text-white/80 backdrop-blur">
-              <span className="inline-block h-2 w-2 rounded-full bg-gradient-to-r from-violet-400 to-fuchsia-400" />
-              Москва • Берёзовая аллея 7Б • Очный формат
+            <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-violet-500/10 border border-violet-500/20 text-violet-300 text-xs font-medium mb-6">
+              <span className="w-2 h-2 rounded-full bg-violet-400 animate-pulse" />
+              Очное обучение в Москве
             </div>
-
-            <h1 className="mt-5 text-balance text-4xl font-semibold tracking-tight md:text-5xl">
-              Современная гелевая техника:
-              <span className="block bg-gradient-to-r from-violet-200 via-fuchsia-200 to-sky-200 bg-clip-text text-transparent">
-                архитектура + опил после материала
+            <h1 className="text-4xl md:text-5xl lg:text-6xl font-extrabold leading-tight mb-6">
+              <span className="bg-gradient-to-r from-white via-violet-200 to-fuchsia-200 bg-clip-text text-transparent">
+                Станьте мастером маникюра
+              </span>
+              <br />
+              <span className="bg-gradient-to-r from-violet-400 to-fuchsia-400 bg-clip-text text-transparent">
+                с нуля за 7 дней
               </span>
             </h1>
-
-            <p className="mt-4 max-w-xl text-pretty text-base leading-relaxed text-white/75 md:text-lg">
-              Инструктор <span className="font-semibold text-white">Елена</span> (Paris Nail), стаж 10+ лет.
-              Делаем результат, который выглядит “дорого” и держится стабильно: жёсткий гель, правильная форма и
-              последовательность “сначала материал → потом опил”.
+            <p className="text-gray-400 text-lg md:text-xl leading-relaxed mb-8 max-w-xl">
+              Авторская программа обучения от инструктора с 10‑летним стажем.
+              Жёсткий гель, архитектура, правильный опил — техники, которые
+              дают стабильную носку и очередь из клиентов.
             </p>
-
-            <div className="mt-7 flex flex-col gap-3 sm:flex-row">
+            <div className="flex flex-col sm:flex-row gap-4">
               <a
-                href={VK_LINK}
-                className="inline-flex items-center justify-center rounded-2xl bg-gradient-to-r from-violet-500 to-fuchsia-500 px-6 py-3 text-sm font-semibold text-white shadow-[0_12px_40px_rgba(232,121,249,0.18)] transition hover:brightness-110"
+                href={vkLink}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="inline-flex items-center justify-center px-8 py-4 rounded-full bg-gradient-to-r from-violet-600 to-fuchsia-600 text-white font-bold text-lg hover:from-violet-500 hover:to-fuchsia-500 transition-all shadow-xl shadow-violet-500/30 hover:shadow-violet-500/50"
               >
-                Записаться (VK)
+                Записаться
+                <svg
+                  className="ml-2 w-5 h-5"
+                  fill="none"
+                  stroke="currentColor"
+                  viewBox="0 0 24 24"
+                >
+                  <path
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                    strokeWidth={2}
+                    d="M17 8l4 4m0 0l-4 4m4-4H3"
+                  />
+                </svg>
               </a>
               <a
                 href="#courses"
-                className="inline-flex items-center justify-center rounded-2xl border border-white/15 bg-white/5 px-6 py-3 text-sm font-semibold text-white/85 backdrop-blur transition hover:bg-white/10"
+                className="inline-flex items-center justify-center px-8 py-4 rounded-full border border-violet-500/30 text-violet-300 font-semibold hover:bg-violet-500/10 transition-all"
               >
-                Смотреть 2 курса
+                Посмотреть курсы
               </a>
             </div>
-
-            <div className="mt-8 grid grid-cols-2 gap-3 sm:grid-cols-3">
-              {[
-                { k: "2", v: "курса очно" },
-                { k: "10+", v: "лет стажа" },
-                { k: "Москва", v: "Берёзовая аллея 7Б" },
-              ].map((s) => (
-                <div
-                  key={s.v}
-                  className="rounded-2xl border border-white/10 bg-white/5 p-4 backdrop-blur"
-                >
-                  <div className="text-2xl font-semibold">{s.k}</div>
-                  <div className="mt-1 text-xs text-white/70">{s.v}</div>
+            <div className="flex items-center gap-6 mt-10 text-sm text-gray-500">
+              <div className="flex items-center gap-2">
+                <div className="w-8 h-8 rounded-full bg-violet-500/20 flex items-center justify-center">
+                  <span className="text-violet-400 text-xs">📍</span>
                 </div>
-              ))}
+                Москва
+              </div>
+              <div className="flex items-center gap-2">
+                <div className="w-8 h-8 rounded-full bg-violet-500/20 flex items-center justify-center">
+                  <span className="text-violet-400 text-xs">🎓</span>
+                </div>
+                Сертификат
+              </div>
+              <div className="flex items-center gap-2">
+                <div className="w-8 h-8 rounded-full bg-violet-500/20 flex items-center justify-center">
+                  <span className="text-violet-400 text-xs">✨</span>
+                </div>
+                10+ лет опыта
+              </div>
             </div>
           </div>
-
           <div className="relative">
-            <div className="absolute -inset-6 rounded-[32px] bg-gradient-to-br from-violet-500/25 via-fuchsia-500/15 to-sky-500/15 blur-2xl" />
-            <div className="relative grid gap-4 rounded-[32px] border border-white/10 bg-white/5 p-4 backdrop-blur md:p-5">
-              <div className="grid grid-cols-2 gap-4">
-                <img
-                  className="h-44 w-full rounded-2xl object-cover ring-1 ring-white/10 md:h-52"
-                  src="https://source.unsplash.com/900x900/?moscow,night,city"
-                  alt="Москва — городской стиль"
-                />
-                <img
-                  className="h-44 w-full rounded-2xl object-cover ring-1 ring-white/10 md:h-52"
-                  src="https://source.unsplash.com/900x900/?manicure,studio"
-                  alt="Студия маникюра — обучение"
-                />
-              </div>
+            <div className="absolute inset-0 bg-gradient-to-br from-violet-600/30 to-fuchsia-600/30 rounded-3xl blur-2xl" />
+            <div className="relative rounded-3xl overflow-hidden border border-violet-500/20 shadow-2xl shadow-violet-500/10">
               <img
-                className="h-48 w-full rounded-2xl object-cover ring-1 ring-white/10 md:h-56"
-                src="https://source.unsplash.com/1200x800/?nail,artist,classroom"
-                alt="Процесс обучения маникюру"
+                src="https://images.unsplash.com/photo-1604654894610-df63bc536371?w=800&h=600&fit=crop"
+                alt="Маникюр в Москве"
+                className="w-full h-[350px] md:h-[450px] object-cover"
               />
-
-              <div className="grid grid-cols-1 gap-3 md:grid-cols-2">
-                <div className="rounded-2xl border border-white/10 bg-black/20 p-4">
-                  <div className="text-sm font-semibold">Техника</div>
-                  <div className="mt-1 text-sm text-white/70">
-                    Жёсткий гель • Архитектура • Опил после материала
-                  </div>
-                </div>
-                <div className="rounded-2xl border border-white/10 bg-black/20 p-4">
-                  <div className="text-sm font-semibold">Запись</div>
-                  <div className="mt-1 text-sm text-white/70">
-                    Напишите в VK слово <span className="font-semibold text-white">«КУРС»</span>
-                  </div>
+              <div className="absolute inset-0 bg-gradient-to-t from-gray-950/60 via-transparent to-transparent" />
+              <div className="absolute bottom-6 left-6 right-6">
+                <div className="backdrop-blur-xl bg-gray-950/50 rounded-2xl p-4 border border-violet-500/20">
+                  <p className="text-sm text-violet-300 font-medium">
+                    Берёзовая аллея 7Б, Москва
+                  </p>
+                  <p className="text-xs text-gray-400 mt-1">
+                    Современная студия с полным оснащением
+                  </p>
                 </div>
               </div>
-            </div>
-
-            <div className="mt-4 text-xs text-white/55">
-              Фото — заглушки Unsplash. На реальном лендинге заменим на ваши работы/класс.
             </div>
           </div>
         </div>
       </section>
 
       {/* Courses */}
-      <section id="courses" className="relative border-t border-white/10">
-        <div className="mx-auto max-w-6xl px-4 py-14 md:px-6 md:py-20">
-          <SectionTitle
-            eyebrow="2 формата очного обучения"
-            title="Выберите курс под вашу задачу"
-            text="7 дней — системный рост. 1 день — точечное повышение. В обоих форматах: современная последовательность и контроль архитектуры."
-          />
+      <section
+        id="courses"
+        className="relative z-10 max-w-7xl mx-auto px-4 py-20"
+      >
+        <div className="text-center mb-14">
+          <span className="inline-block px-4 py-1.5 rounded-full bg-violet-500/10 border border-violet-500/20 text-violet-300 text-xs font-medium mb-4">
+            Программы обучения
+          </span>
+          <h2 className="text-3xl md:text-4xl lg:text-5xl font-extrabold bg-gradient-to-r from-white to-violet-200 bg-clip-text text-transparent mb-4">
+            2 курса — 2 уровня
+          </h2>
+          <p className="text-gray-400 text-lg max-w-2xl mx-auto">
+            Выберите программу, которая подходит именно вам: с нуля до
+            профессионала или апгрейд навыков за 1 день
+          </p>
+        </div>
 
-          <div className="grid grid-cols-1 gap-6 lg:grid-cols-2">
-            {courses.map((c) => (
-              <div
-                key={c.title}
-                className={clsx(
-                  "relative overflow-hidden rounded-[28px] border border-white/10 bg-white/5 p-6 backdrop-blur",
-                  "shadow-[0_20px_80px_rgba(0,0,0,0.35)]"
-                )}
-              >
-                <div className={clsx("absolute inset-0 bg-gradient-to-br", c.accent)} />
-                <div className="relative">
-                  <div className="flex flex-wrap items-center justify-between gap-3">
-                    <div className="inline-flex items-center rounded-full border border-white/15 bg-black/25 px-3 py-1 text-xs text-white/80">
-                      {c.tag}
-                    </div>
-                    <div className="text-2xl font-semibold tracking-tight">{c.price}</div>
-                  </div>
-
-                  <h3 className="mt-4 text-2xl font-semibold tracking-tight">{c.title}</h3>
-                  <p className="mt-2 text-sm leading-relaxed text-white/75">{c.forWhom}</p>
-
-                  <div className="mt-5 grid gap-2">
-                    {c.bullets.map((b) => (
-                      <div
-                        key={b}
-                        className="flex items-start gap-3 rounded-2xl border border-white/10 bg-black/20 p-3"
-                      >
-                        <div className="mt-1 h-2 w-2 shrink-0 rounded-full bg-gradient-to-r from-violet-300 to-fuchsia-300" />
-                        <div className="text-sm text-white/80">{b}</div>
-                      </div>
-                    ))}
-                  </div>
-
-                  <div className="mt-6 flex flex-col gap-3 sm:flex-row">
-                    <a
-                      href={VK_LINK}
-                      className="inline-flex flex-1 items-center justify-center rounded-2xl bg-gradient-to-r from-violet-500 to-fuchsia-500 px-5 py-3 text-sm font-semibold text-white transition hover:brightness-110"
-                    >
-                      Записаться (VK)
-                    </a>
-                    <a
-                      href="#tech"
-                      className="inline-flex flex-1 items-center justify-center rounded-2xl border border-white/15 bg-white/5 px-5 py-3 text-sm font-semibold text-white/85 backdrop-blur transition hover:bg-white/10"
-                    >
-                      Почему эта техника
-                    </a>
-                  </div>
-
-                  <div className="mt-4 text-xs text-white/60">
-                    Москва • Берёзовая аллея 7Б • Напишите «КУРС»
-                  </div>
-                </div>
+        <div className="grid md:grid-cols-2 gap-8">
+          {/* Course 1 */}
+          <div className="relative group">
+            <div className="absolute inset-0 bg-gradient-to-br from-violet-600/20 to-fuchsia-600/20 rounded-3xl blur-xl opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
+            <div className="relative backdrop-blur-xl bg-gray-900/60 rounded-3xl border border-violet-500/20 p-8 hover:border-violet-500/40 transition-all duration-300 h-full flex flex-col">
+              <div className="flex items-center justify-between mb-6">
+                <span className="px-3 py-1 rounded-full bg-gradient-to-r from-violet-600 to-fuchsia-600 text-white text-xs font-bold">
+                  ПОПУЛЯРНЫЙ
+                </span>
+                <span className="text-sm text-gray-500">7 дней</span>
               </div>
-            ))}
+              <h3 className="text-2xl font-bold text-white mb-2">
+                Топ-мастер маникюра
+              </h3>
+              <div className="flex items-baseline gap-2 mb-6">
+                <span className="text-4xl font-extrabold bg-gradient-to-r from-violet-300 to-fuchsia-300 bg-clip-text text-transparent">
+                  45 000 ₽
+                </span>
+              </div>
+
+              <div className="mb-6">
+                <p className="text-sm text-violet-300 font-semibold mb-2">
+                  Кому подходит:
+                </p>
+                <p className="text-gray-400 text-sm">
+                  Новичкам без опыта и начинающим мастерам, которые хотят
+                  освоить профессию с нуля по авторской методике.
+                </p>
+              </div>
+
+              <div className="mb-8 flex-1">
+                <p className="text-sm text-violet-300 font-semibold mb-3">
+                  Результаты:
+                </p>
+                <ul className="space-y-2.5">
+                  {[
+                    "Правильная постановка руки и инструмента",
+                    "Аппаратный маникюр под любой тип кожи",
+                    "Архитектура ногтя жёстким гелем",
+                    "Опил формы ПОСЛЕ нанесения материала",
+                    "Жёсткость свободного края = носка 4+ нед.",
+                    "Работа с проблемными ногтями",
+                    "Цветовое покрытие и дизайн",
+                    "Сертификат об окончании курса",
+                  ].map((item, i) => (
+                    <li key={i} className="flex items-start gap-3 text-sm text-gray-300">
+                      <span className="mt-0.5 w-5 h-5 rounded-full bg-violet-500/20 flex items-center justify-center flex-shrink-0">
+                        <svg
+                          className="w-3 h-3 text-violet-400"
+                          fill="none"
+                          stroke="currentColor"
+                          viewBox="0 0 24 24"
+                        >
+                          <path
+                            strokeLinecap="round"
+                            strokeLinejoin="round"
+                            strokeWidth={3}
+                            d="M5 13l4 4L19 7"
+                          />
+                        </svg>
+                      </span>
+                      {item}
+                    </li>
+                  ))}
+                </ul>
+              </div>
+
+              <a
+                href={vkLink}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="block text-center py-4 rounded-2xl bg-gradient-to-r from-violet-600 to-fuchsia-600 text-white font-bold hover:from-violet-500 hover:to-fuchsia-500 transition-all shadow-lg shadow-violet-500/25"
+              >
+                Записаться на курс
+              </a>
+            </div>
+          </div>
+
+          {/* Course 2 */}
+          <div className="relative group">
+            <div className="absolute inset-0 bg-gradient-to-br from-indigo-600/20 to-violet-600/20 rounded-3xl blur-xl opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
+            <div className="relative backdrop-blur-xl bg-gray-900/60 rounded-3xl border border-violet-500/20 p-8 hover:border-violet-500/40 transition-all duration-300 h-full flex flex-col">
+              <div className="flex items-center justify-between mb-6">
+                <span className="px-3 py-1 rounded-full bg-violet-500/20 border border-violet-500/30 text-violet-300 text-xs font-bold">
+                  ЭКСПРЕСС
+                </span>
+                <span className="text-sm text-gray-500">1 день</span>
+              </div>
+              <h3 className="text-2xl font-bold text-white mb-2">
+                Повышение квалификации
+              </h3>
+              <div className="flex items-baseline gap-2 mb-6">
+                <span className="text-4xl font-extrabold bg-gradient-to-r from-violet-300 to-fuchsia-300 bg-clip-text text-transparent">
+                  10 000 ₽
+                </span>
+              </div>
+
+              <div className="mb-6">
+                <p className="text-sm text-violet-300 font-semibold mb-2">
+                  Кому подходит:
+                </p>
+                <p className="text-gray-400 text-sm">
+                  Практикующим мастерам, которые хотят освоить технику жёсткого
+                  геля, архитектуру и авторский опил за 1 интенсивный день.
+                </p>
+              </div>
+
+              <div className="mb-8 flex-1">
+                <p className="text-sm text-violet-300 font-semibold mb-3">
+                  Результаты:
+                </p>
+                <ul className="space-y-2.5">
+                  {[
+                    "Техника жёсткого геля на практике",
+                    "Опил формы после нанесения материала",
+                    "Идеальная архитектура и апекс",
+                    "Разбор ваших ошибок с обратной связью",
+                    "Увеличение носки покрытия у клиентов",
+                    "Сертификат о повышении квалификации",
+                  ].map((item, i) => (
+                    <li key={i} className="flex items-start gap-3 text-sm text-gray-300">
+                      <span className="mt-0.5 w-5 h-5 rounded-full bg-violet-500/20 flex items-center justify-center flex-shrink-0">
+                        <svg
+                          className="w-3 h-3 text-violet-400"
+                          fill="none"
+                          stroke="currentColor"
+                          viewBox="0 0 24 24"
+                        >
+                          <path
+                            strokeLinecap="round"
+                            strokeLinejoin="round"
+                            strokeWidth={3}
+                            d="M5 13l4 4L19 7"
+                          />
+                        </svg>
+                      </span>
+                      {item}
+                    </li>
+                  ))}
+                </ul>
+              </div>
+
+              <a
+                href={vkLink}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="block text-center py-4 rounded-2xl border-2 border-violet-500/40 text-violet-300 font-bold hover:bg-violet-500/10 transition-all"
+              >
+                Записаться на курс
+              </a>
+            </div>
           </div>
         </div>
       </section>
 
-      {/* Tech / Features */}
-      <section id="tech" className="relative border-t border-white/10">
-        <div className="mx-auto max-w-6xl px-4 py-14 md:px-6 md:py-20">
-          <SectionTitle
-            eyebrow="Техника, которой работают сейчас"
-            title="Почему жёсткий гель и опил после материала — это про носку и форму"
-            text="Фокус на архитектуре и последовательности, а не на лишних слоях мягких материалов."
-          />
+      {/* Technique */}
+      <section
+        id="technique"
+        className="relative z-10 max-w-7xl mx-auto px-4 py-20"
+      >
+        <div className="text-center mb-14">
+          <span className="inline-block px-4 py-1.5 rounded-full bg-violet-500/10 border border-violet-500/20 text-violet-300 text-xs font-medium mb-4">
+            Авторская методика
+          </span>
+          <h2 className="text-3xl md:text-4xl lg:text-5xl font-extrabold bg-gradient-to-r from-white to-violet-200 bg-clip-text text-transparent mb-4">
+            Почему жёсткий гель и опил после материала?
+          </h2>
+          <p className="text-gray-400 text-lg max-w-2xl mx-auto">
+            Техники, которые отличают профессионала от «очередного мастера»
+          </p>
+        </div>
 
-          <div className="grid grid-cols-1 gap-5 md:grid-cols-2 lg:grid-cols-3">
-            {features.map((f) => (
-              <div
-                key={f.title}
-                className="rounded-[26px] border border-white/10 bg-white/5 p-6 backdrop-blur transition hover:bg-white/[0.07]"
-              >
-                <div className="mb-4 h-10 w-10 rounded-2xl bg-gradient-to-br from-violet-500/40 via-fuchsia-500/25 to-sky-500/25 ring-1 ring-white/15" />
-                <div className="text-lg font-semibold">{f.title}</div>
-                <div className="mt-2 text-sm leading-relaxed text-white/70">{f.text}</div>
+        <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-6">
+          {[
+            {
+              icon: "💎",
+              title: "Жёсткий гель",
+              desc: "Создаёт прочную структуру ногтя, которая не прогибается и не ломается. Идеальная основа для любого дизайна.",
+            },
+            {
+              icon: "📐",
+              title: "Архитектура ногтя",
+              desc: "Правильный апекс, ровная арка и С‑изгиб — три кита, на которых держится идеальная форма и носка.",
+            },
+            {
+              icon: "✂️",
+              title: "Опил ПОСЛЕ материала",
+              desc: "Форма задаётся не до, а после нанесения геля. Это даёт ювелирную точность и симметрию каждого ногтя.",
+            },
+            {
+              icon: "🛡️",
+              title: "Жёсткость свободного края",
+              desc: "Свободный край не гнётся и не отслаивается. Клиенты ходят 4–5 недель без сколов и отслоек.",
+            },
+            {
+              icon: "⏰",
+              title: "Стабильная носка 4+ недель",
+              desc: "Правильная техника = довольный клиент, который возвращается и рекомендует вас подругам.",
+            },
+            {
+              icon: "🚀",
+              title: "Конкурентное преимущество",
+              desc: "Менее 10% мастеров владеют этой техникой. Вы будете выделяться на рынке с первого дня.",
+            },
+          ].map((item, i) => (
+            <div
+              key={i}
+              className="group backdrop-blur-xl bg-gray-900/40 rounded-2xl border border-violet-500/10 p-6 hover:border-violet-500/30 hover:bg-gray-900/60 transition-all duration-300"
+            >
+              <div className="w-12 h-12 rounded-xl bg-gradient-to-br from-violet-500/20 to-fuchsia-500/20 flex items-center justify-center text-2xl mb-4 group-hover:scale-110 transition-transform">
+                {item.icon}
               </div>
-            ))}
-          </div>
-
-          <div className="mt-10 grid grid-cols-1 gap-6 lg:grid-cols-2">
-            <div className="rounded-[28px] border border-white/10 bg-white/5 p-6 backdrop-blur">
-              <div className="text-xl font-semibold">Ключевая последовательность</div>
-              <div className="mt-3 grid gap-3">
-                {[
-                  "Подготовка",
-                  "Выкладка жёсткого геля",
-                  "Построение архитектуры",
-                  "Опил формы ПОСЛЕ материала",
-                  "Декоративное покрытие (при необходимости)",
-                ].map((s, i) => (
-                  <div key={s} className="flex items-center gap-3 rounded-2xl border border-white/10 bg-black/20 p-3">
-                    <div className="grid h-7 w-7 place-items-center rounded-xl bg-white/10 text-xs font-semibold text-white/85">
-                      {i + 1}
-                    </div>
-                    <div className="text-sm text-white/80">{s}</div>
-                  </div>
-                ))}
-              </div>
+              <h3 className="text-lg font-bold text-white mb-2">{item.title}</h3>
+              <p className="text-gray-400 text-sm leading-relaxed">
+                {item.desc}
+              </p>
             </div>
-
-            <div className="relative overflow-hidden rounded-[28px] border border-white/10 bg-white/5 backdrop-blur">
-              <div className="absolute inset-0 bg-gradient-to-br from-violet-500/20 via-fuchsia-500/10 to-sky-500/15" />
-              <div className="relative p-6">
-                <div className="text-xl font-semibold">Это обучение — про качество</div>
-                <p className="mt-2 text-sm leading-relaxed text-white/70">
-                  Вы не просто “делаете покрытие”, вы понимаете, как строится форма и почему результат держится.
-                  На очном обучении быстрее формируется навык и уверенность в руках.
-                </p>
-
-                <div className="mt-5 grid grid-cols-1 gap-4 sm:grid-cols-2">
-                  <div className="rounded-2xl border border-white/10 bg-black/20 p-4">
-                    <div className="text-sm font-semibold">Форма</div>
-                    <div className="mt-1 text-sm text-white/70">контроль боковых и торца</div>
-                  </div>
-                  <div className="rounded-2xl border border-white/10 bg-black/20 p-4">
-                    <div className="text-sm font-semibold">Носка</div>
-                    <div className="mt-1 text-sm text-white/70">жёсткость свободного края</div>
-                  </div>
-                </div>
-
-                <div className="mt-6">
-                  <a
-                    href={VK_LINK}
-                    className="inline-flex w-full items-center justify-center rounded-2xl bg-gradient-to-r from-violet-500 to-fuchsia-500 px-6 py-3 text-sm font-semibold text-white transition hover:brightness-110"
-                  >
-                    Записаться и написать «КУРС»
-                  </a>
-                </div>
-              </div>
-            </div>
-          </div>
+          ))}
         </div>
       </section>
 
       {/* Instructor */}
-      <section id="instructor" className="relative border-t border-white/10">
-        <div className="mx-auto max-w-6xl px-4 py-14 md:px-6 md:py-20">
-          <SectionTitle
-            eyebrow="Кто ведёт обучение"
-            title="Елена — инструктор Paris Nail"
-            text="Стаж 10+ лет • Диплом доп. образования: «Инструкторский курс. Преподаватель по маникюру» (Paris Nail)."
-          />
-
-          <div className="grid grid-cols-1 gap-8 lg:grid-cols-[420px_1fr]">
-            <div className="relative overflow-hidden rounded-[28px] border border-white/10 bg-white/5 backdrop-blur">
-              <div className="absolute inset-0 bg-gradient-to-br from-violet-500/20 via-fuchsia-500/10 to-sky-500/10" />
+      <section
+        id="instructor"
+        className="relative z-10 max-w-7xl mx-auto px-4 py-20"
+      >
+        <div className="backdrop-blur-xl bg-gray-900/40 rounded-3xl border border-violet-500/20 overflow-hidden">
+          <div className="grid lg:grid-cols-2">
+            <div className="relative">
               <img
-                className="relative h-72 w-full object-cover md:h-[420px]"
-                src="https://source.unsplash.com/1200x900/?woman,teacher,studio"
-                alt="Инструктор (заглушка Unsplash)"
+                src="https://images.unsplash.com/photo-1594744803329-e58b31de8bf5?w=700&h=800&fit=crop&crop=face"
+                alt="Инструктор Елена"
+                className="w-full h-[400px] lg:h-full object-cover"
               />
-              <div className="relative p-5">
-                <div className="text-lg font-semibold">Елена</div>
-                <div className="mt-1 text-sm text-white/70">Инструктор Paris Nail • стаж 10+ лет</div>
-              </div>
+              <div className="absolute inset-0 bg-gradient-to-r from-transparent to-gray-950/40 lg:block hidden" />
+              <div className="absolute inset-0 bg-gradient-to-t from-gray-950/60 to-transparent lg:hidden" />
             </div>
-
-            <div className="rounded-[28px] border border-white/10 bg-white/5 p-6 backdrop-blur">
-              <div className="text-xl font-semibold">Что важно в моём подходе</div>
-              <div className="mt-4 grid gap-3">
+            <div className="p-8 md:p-12 flex flex-col justify-center">
+              <span className="inline-block px-4 py-1.5 rounded-full bg-violet-500/10 border border-violet-500/20 text-violet-300 text-xs font-medium mb-6 w-fit">
+                Ваш инструктор
+              </span>
+              <h2 className="text-3xl md:text-4xl font-extrabold text-white mb-4">
+                Елена
+              </h2>
+              <div className="flex flex-wrap gap-3 mb-6">
+                <span className="px-3 py-1.5 rounded-full bg-violet-500/10 border border-violet-500/20 text-violet-300 text-xs font-medium">
+                  10+ лет в индустрии
+                </span>
+                <span className="px-3 py-1.5 rounded-full bg-violet-500/10 border border-violet-500/20 text-violet-300 text-xs font-medium">
+                  Paris Nail
+                </span>
+                <span className="px-3 py-1.5 rounded-full bg-violet-500/10 border border-violet-500/20 text-violet-300 text-xs font-medium">
+                  Инструктор
+                </span>
+              </div>
+              <p className="text-gray-400 leading-relaxed mb-4">
+                Сертифицированный инструктор с дипломом{" "}
+                <span className="text-violet-300 font-medium">
+                  «Инструкторский курс. Преподаватель по маникюру»
+                </span>{" "}
+                от школы Paris Nail. Более 10 лет практики и преподавания.
+              </p>
+              <p className="text-gray-400 leading-relaxed mb-6">
+                Елена обучила сотни мастеров авторской технике жёсткого геля и
+                правильного опила. Каждый ученик получает персональное
+                внимание, разбор ошибок и поддержку после окончания курса.
+              </p>
+              <div className="grid grid-cols-3 gap-4">
                 {[
-                  "Ставлю логику работы: материал → опил, чтобы вы понимали «почему» и «как».",
-                  "Показываю архитектуру на практике: апекс, боковые, торец — без хаоса в толщине.",
-                  "Даю понятные критерии качества: вы видите ошибки сразу и знаете, как их исправлять.",
-                  "Очный формат — это быстрый рост: корректировка по ходу и отработка до результата.",
-                ].map((t) => (
-                  <div key={t} className="rounded-2xl border border-white/10 bg-black/20 p-4 text-sm text-white/75">
-                    {t}
+                  ["500+", "Учеников"],
+                  ["10+", "Лет опыта"],
+                  ["4.9", "Рейтинг"],
+                ].map(([value, label], i) => (
+                  <div
+                    key={i}
+                    className="text-center p-3 rounded-xl bg-violet-500/5 border border-violet-500/10"
+                  >
+                    <div className="text-2xl font-extrabold bg-gradient-to-r from-violet-300 to-fuchsia-300 bg-clip-text text-transparent">
+                      {value}
+                    </div>
+                    <div className="text-xs text-gray-500 mt-1">{label}</div>
                   </div>
                 ))}
-              </div>
-
-              <div className="mt-6 grid grid-cols-1 gap-4 sm:grid-cols-2">
-                <div className="rounded-2xl border border-white/10 bg-black/20 p-4">
-                  <div className="text-sm font-semibold">Локация</div>
-                  <div className="mt-1 text-sm text-white/70">Москва, Берёзовая аллея 7Б</div>
-                </div>
-                <div className="rounded-2xl border border-white/10 bg-black/20 p-4">
-                  <div className="text-sm font-semibold">Запись</div>
-                  <div className="mt-1 text-sm text-white/70">В VK: напишите «КУРС»</div>
-                </div>
-              </div>
-
-              <div className="mt-6 flex flex-col gap-3 sm:flex-row">
-                <a
-                  href={VK_LINK}
-                  className="inline-flex flex-1 items-center justify-center rounded-2xl bg-gradient-to-r from-violet-500 to-fuchsia-500 px-6 py-3 text-sm font-semibold text-white transition hover:brightness-110"
-                >
-                  Написать в VK
-                </a>
-                <a
-                  href="#location"
-                  className="inline-flex flex-1 items-center justify-center rounded-2xl border border-white/15 bg-white/5 px-6 py-3 text-sm font-semibold text-white/85 backdrop-blur transition hover:bg-white/10"
-                >
-                  Посмотреть адрес
-                </a>
               </div>
             </div>
           </div>
         </div>
       </section>
 
-      {/* Steps */}
-      <section className="relative border-t border-white/10">
-        <div className="mx-auto max-w-6xl px-4 py-14 md:px-6 md:py-20">
-          <SectionTitle
-            eyebrow="Как проходит обучение"
-            title="Структурно, практично, с контролем результата"
-            text="Без «воды». Вы понимаете шаги и отрабатываете их до уверенности."
-          />
+      {/* Process */}
+      <section
+        id="process"
+        className="relative z-10 max-w-7xl mx-auto px-4 py-20"
+      >
+        <div className="text-center mb-14">
+          <span className="inline-block px-4 py-1.5 rounded-full bg-violet-500/10 border border-violet-500/20 text-violet-300 text-xs font-medium mb-4">
+            Этапы обучения
+          </span>
+          <h2 className="text-3xl md:text-4xl lg:text-5xl font-extrabold bg-gradient-to-r from-white to-violet-200 bg-clip-text text-transparent mb-4">
+            Как проходит обучение
+          </h2>
+          <p className="text-gray-400 text-lg max-w-2xl mx-auto">
+            Структурированная программа с упором на практику
+          </p>
+        </div>
 
-          <div className="grid grid-cols-1 gap-5 md:grid-cols-2">
-            {steps.map((s, idx) => (
-              <div
-                key={s.title}
-                className="relative overflow-hidden rounded-[26px] border border-white/10 bg-white/5 p-6 backdrop-blur"
-              >
-                <div className="absolute -right-10 -top-10 h-32 w-32 rounded-full bg-violet-500/15 blur-2xl" />
-                <div className="relative flex items-start gap-4">
-                  <div className="grid h-11 w-11 shrink-0 place-items-center rounded-2xl bg-gradient-to-br from-violet-500/40 via-fuchsia-500/25 to-sky-500/25 ring-1 ring-white/15">
-                    <span className="text-sm font-semibold">{idx + 1}</span>
-                  </div>
-                  <div>
-                    <div className="text-lg font-semibold">{s.title}</div>
-                    <div className="mt-2 text-sm leading-relaxed text-white/70">{s.text}</div>
-                  </div>
+        <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-6">
+          {[
+            {
+              step: "01",
+              title: "Теоретическая база",
+              desc: "Изучаете строение ногтя, типы кожи, материалы и инструменты. Разбираете гигиену и безопасность.",
+              color: "from-violet-500 to-indigo-500",
+            },
+            {
+              step: "02",
+              title: "Практика на типсах",
+              desc: "Отрабатываете технику аппаратного маникюра и нанесения жёсткого геля на учебных моделях.",
+              color: "from-indigo-500 to-violet-500",
+            },
+            {
+              step: "03",
+              title: "Работа на моделях",
+              desc: "Практикуетесь на реальных руках под наблюдением инструктора с мгновенной обратной связью.",
+              color: "from-violet-500 to-fuchsia-500",
+            },
+            {
+              step: "04",
+              title: "Экзамен и сертификат",
+              desc: "Сдаёте финальную работу, получаете сертификат и рекомендации по старту карьеры.",
+              color: "from-fuchsia-500 to-violet-500",
+            },
+          ].map((item, i) => (
+            <div key={i} className="relative group">
+              <div className="backdrop-blur-xl bg-gray-900/40 rounded-2xl border border-violet-500/10 p-6 hover:border-violet-500/30 transition-all duration-300 h-full">
+                <div
+                  className={`inline-flex items-center justify-center w-14 h-14 rounded-2xl bg-gradient-to-br ${item.color} text-white font-extrabold text-xl mb-5 group-hover:scale-110 transition-transform`}
+                >
+                  {item.step}
                 </div>
-              </div>
-            ))}
-          </div>
-
-          <div className="mt-10 rounded-[28px] border border-white/10 bg-white/5 p-6 backdrop-blur">
-            <div className="grid grid-cols-1 items-center gap-6 lg:grid-cols-[1fr_420px]">
-              <div>
-                <div className="text-xl font-semibold">Готовы выбрать формат?</div>
-                <p className="mt-2 text-sm leading-relaxed text-white/70">
-                  Напишите «КУРС» — отправлю программу и помогу выбрать: 7 дней (система) или 1 день (интенсив).
+                <h3 className="text-lg font-bold text-white mb-3">
+                  {item.title}
+                </h3>
+                <p className="text-gray-400 text-sm leading-relaxed">
+                  {item.desc}
                 </p>
-                <div className="mt-5 flex flex-col gap-3 sm:flex-row">
-                  <a
-                    href={VK_LINK}
-                    className="inline-flex items-center justify-center rounded-2xl bg-gradient-to-r from-violet-500 to-fuchsia-500 px-6 py-3 text-sm font-semibold text-white transition hover:brightness-110"
-                  >
-                    Записаться в VK
-                  </a>
-                  <a
-                    href="#courses"
-                    className="inline-flex items-center justify-center rounded-2xl border border-white/15 bg-white/5 px-6 py-3 text-sm font-semibold text-white/85 backdrop-blur transition hover:bg-white/10"
-                  >
-                    Сравнить курсы
-                  </a>
+              </div>
+              {i < 3 && (
+                <div className="hidden lg:block absolute top-1/2 -right-3 w-6 text-violet-500/30">
+                  <svg fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path
+                      strokeLinecap="round"
+                      strokeLinejoin="round"
+                      strokeWidth={2}
+                      d="M9 5l7 7-7 7"
+                    />
+                  </svg>
                 </div>
-              </div>
-
-              <div className="relative overflow-hidden rounded-[22px] border border-white/10 bg-black/20">
-                <img
-                  className="h-56 w-full object-cover"
-                  src="https://source.unsplash.com/1200x800/?city,lights,purple"
-                  alt="Городская атмосфера (заглушка Unsplash)"
-                />
-              </div>
+              )}
             </div>
-          </div>
+          ))}
         </div>
       </section>
 
       {/* Reviews */}
-      <section id="reviews" className="relative border-t border-white/10">
-        <div className="mx-auto max-w-6xl px-4 py-14 md:px-6 md:py-20">
-          <SectionTitle
-            eyebrow="Отзывы"
-            title="Что говорят ученицы"
-            text="Здесь — текстовые заглушки. На финальном лендинге заменим на ваши реальные отзывы/скрины."
-          />
+      <section
+        id="reviews"
+        className="relative z-10 max-w-7xl mx-auto px-4 py-20"
+      >
+        <div className="text-center mb-14">
+          <span className="inline-block px-4 py-1.5 rounded-full bg-violet-500/10 border border-violet-500/20 text-violet-300 text-xs font-medium mb-4">
+            Отзывы выпускников
+          </span>
+          <h2 className="text-3xl md:text-4xl lg:text-5xl font-extrabold bg-gradient-to-r from-white to-violet-200 bg-clip-text text-transparent mb-4">
+            Что говорят ученицы
+          </h2>
+        </div>
 
-          <div className="grid grid-cols-1 gap-5 md:grid-cols-2 lg:grid-cols-3">
-            {reviews.map((r, i) => (
-              <div
-                key={`${r.name}-${i}`}
-                className="relative overflow-hidden rounded-[26px] border border-white/10 bg-white/5 p-6 backdrop-blur"
-              >
-                <div className="absolute -left-10 -bottom-10 h-32 w-32 rounded-full bg-fuchsia-500/15 blur-2xl" />
-                <div className="relative">
-                  <div className="text-sm font-semibold">{r.name}</div>
-                  <div className="mt-3 text-sm leading-relaxed text-white/75">“{r.text}”</div>
-                  <div className="mt-4 flex items-center gap-1 text-xs text-white/55">
-                    <span className="inline-block h-1.5 w-1.5 rounded-full bg-violet-300" />
-                    Очное обучение • Москва
-                  </div>
-                </div>
-              </div>
-            ))}
-          </div>
-
-          <div className="mt-10 text-center">
-            <a
-              href={VK_LINK}
-              className="inline-flex items-center justify-center rounded-2xl bg-gradient-to-r from-violet-500 to-fuchsia-500 px-8 py-3 text-sm font-semibold text-white transition hover:brightness-110"
+        <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-6">
+          {[
+            {
+              name: "Анастасия М.",
+              text: "Пришла вообще без опыта — за 7 дней научилась делать маникюр, который держится у клиенток по 4 недели. Елена объясняет так, что даже сложные вещи становятся понятными.",
+              course: "Топ-мастер маникюра",
+            },
+            {
+              name: "Дарья К.",
+              text: "Я уже работала мастером 2 года, но после повышения квалификации поняла, что делала кучу ошибок. Техника опила после материала — это game changer!",
+              course: "Повышение квалификации",
+            },
+            {
+              name: "Мария В.",
+              text: "Студия оборудована на высшем уровне: всё новое, все материалы предоставляются. Атмосфера очень дружелюбная, нет ощущения, что тебя будут ругать за ошибки.",
+              course: "Топ-мастер маникюра",
+            },
+            {
+              name: "Ольга С.",
+              text: "Через месяц после курса у меня уже была полная запись. Клиентки в восторге от носки — теперь я рекомендую этот курс всем подругам-мастерам.",
+              course: "Топ-мастер маникюра",
+            },
+            {
+              name: "Екатерина Л.",
+              text: "Один день — и я полностью пересмотрела свой подход к архитектуре. Жёсткий гель реально меняет качество работы. Спасибо Елене за терпение!",
+              course: "Повышение квалификации",
+            },
+            {
+              name: "Виктория Н.",
+              text: "Лучшие инвестиции в себя. Уже окупила курс за первый месяц работы. Техника жёсткого геля и правильный опил — это то, чему не учат на обычных курсах.",
+              course: "Топ-мастер маникюра",
+            },
+          ].map((review, i) => (
+            <div
+              key={i}
+              className="backdrop-blur-xl bg-gray-900/40 rounded-2xl border border-violet-500/10 p-6 hover:border-violet-500/30 transition-all duration-300"
             >
-              Хочу так же — написать «КУРС»
-            </a>
-          </div>
+              <div className="flex items-center gap-1 mb-4">
+                {[...Array(5)].map((_, j) => (
+                  <svg
+                    key={j}
+                    className="w-4 h-4 text-violet-400"
+                    fill="currentColor"
+                    viewBox="0 0 20 20"
+                  >
+                    <path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z" />
+                  </svg>
+                ))}
+              </div>
+              <p className="text-gray-300 text-sm leading-relaxed mb-4">
+                &ldquo;{review.text}&rdquo;
+              </p>
+              <div className="flex items-center justify-between">
+                <div className="flex items-center gap-3">
+                  <div className="w-9 h-9 rounded-full bg-gradient-to-br from-violet-500 to-fuchsia-500 flex items-center justify-center text-white text-xs font-bold">
+                    {review.name.charAt(0)}
+                  </div>
+                  <span className="text-sm font-medium text-white">
+                    {review.name}
+                  </span>
+                </div>
+                <span className="text-xs text-violet-400/60 font-medium">
+                  {review.course}
+                </span>
+              </div>
+            </div>
+          ))}
         </div>
       </section>
 
       {/* FAQ */}
-      <section id="faq" className="relative border-t border-white/10">
-        <div className="mx-auto max-w-6xl px-4 py-14 md:px-6 md:py-20">
-          <SectionTitle
-            eyebrow="FAQ"
-            title="Частые вопросы"
-            text="Коротко и по делу — чтобы вам было проще принять решение."
-          />
+      <section id="faq" className="relative z-10 max-w-3xl mx-auto px-4 py-20">
+        <div className="text-center mb-14">
+          <span className="inline-block px-4 py-1.5 rounded-full bg-violet-500/10 border border-violet-500/20 text-violet-300 text-xs font-medium mb-4">
+            Частые вопросы
+          </span>
+          <h2 className="text-3xl md:text-4xl lg:text-5xl font-extrabold bg-gradient-to-r from-white to-violet-200 bg-clip-text text-transparent">
+            FAQ
+          </h2>
+        </div>
 
-          <div className="mx-auto grid max-w-3xl gap-4">
-            {faqs.map((f) => (
-              <details
-                key={f.q}
-                className="group rounded-[22px] border border-white/10 bg-white/5 p-5 backdrop-blur"
-              >
-                <summary className="flex cursor-pointer list-none items-center justify-between gap-4">
-                  <span className="text-sm font-semibold">{f.q}</span>
-                  <span className="grid h-8 w-8 place-items-center rounded-xl border border-white/10 bg-black/20 text-white/80 transition group-open:rotate-45">
-                    +
-                  </span>
-                </summary>
-                <div className="mt-3 text-sm leading-relaxed text-white/70">{f.a}</div>
-              </details>
-            ))}
-          </div>
+        <div className="space-y-4">
+          {[
+            {
+              q: "Нужен ли опыт для курса «Топ-мастер маникюра»?",
+              a: "Нет! Курс рассчитан на новичков без какого-либо опыта. Мы начинаем с самых основ — строения ногтя, работы с инструментом — и постепенно переходим к сложным техникам.",
+            },
+            {
+              q: "Все материалы и инструменты предоставляются?",
+              a: "Да, на время обучения мы предоставляем все необходимые материалы и инструменты. Также вы получите список рекомендаций для самостоятельной закупки после курса.",
+            },
+            {
+              q: "Можно ли оплатить курс в рассрочку?",
+              a: "Да, мы предлагаем рассрочку на курс «Топ-мастер маникюра». Напишите нам в VK для уточнения условий.",
+            },
+            {
+              q: "Какой документ я получу?",
+              a: "По окончании курса вы получите именной сертификат от школы с указанием пройденной программы и количества часов обучения.",
+            },
+            {
+              q: "Сколько человек в группе?",
+              a: "Мы набираем мини-группы до 4 человек, чтобы каждый ученик получил максимум внимания и персональную обратную связь от инструктора.",
+            },
+            {
+              q: "Есть ли поддержка после обучения?",
+              a: "Конечно! Все выпускники получают доступ в закрытый чат, где можно задать вопросы Елене, получить обратную связь по своим работам и найти моделей для практики.",
+            },
+          ].map((item, i) => (
+            <details
+              key={i}
+              className="group backdrop-blur-xl bg-gray-900/40 rounded-2xl border border-violet-500/10 hover:border-violet-500/30 transition-all duration-300"
+            >
+              <summary className="flex items-center justify-between p-6 cursor-pointer list-none text-white font-semibold">
+                <span className="pr-4">{item.q}</span>
+                <svg
+                  className="w-5 h-5 text-violet-400 flex-shrink-0 transition-transform duration-300 group-open:rotate-45"
+                  fill="none"
+                  stroke="currentColor"
+                  viewBox="0 0 24 24"
+                >
+                  <path
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                    strokeWidth={2}
+                    d="M12 4v16m8-8H4"
+                  />
+                </svg>
+              </summary>
+              <div className="px-6 pb-6 text-gray-400 text-sm leading-relaxed">
+                {item.a}
+              </div>
+            </details>
+          ))}
         </div>
       </section>
 
       {/* Location */}
-      <section id="location" className="relative border-t border-white/10">
-        <div className="mx-auto max-w-6xl px-4 py-14 md:px-6 md:py-20">
-          <SectionTitle
-            eyebrow="Локация"
-            title="Москва, Берёзовая аллея 7Б"
-            text="Очный формат. После записи пришлю ориентиры и удобный маршрут."
-          />
+      <section
+        id="location"
+        className="relative z-10 max-w-7xl mx-auto px-4 py-20"
+      >
+        <div className="text-center mb-14">
+          <span className="inline-block px-4 py-1.5 rounded-full bg-violet-500/10 border border-violet-500/20 text-violet-300 text-xs font-medium mb-4">
+            Где мы находимся
+          </span>
+          <h2 className="text-3xl md:text-4xl lg:text-5xl font-extrabold bg-gradient-to-r from-white to-violet-200 bg-clip-text text-transparent mb-4">
+            Локация
+          </h2>
+          <p className="text-gray-400 text-lg">
+            Москва, Берёзовая аллея 7Б
+          </p>
+        </div>
 
-          <div className="grid grid-cols-1 gap-6 lg:grid-cols-[1fr_420px]">
-            <div className="rounded-[28px] border border-white/10 bg-white/5 p-6 backdrop-blur">
-              <div className="text-xl font-semibold">Как добраться</div>
-              <p className="mt-2 text-sm leading-relaxed text-white/70">
-                Адрес: <span className="font-semibold text-white">Москва, Берёзовая аллея 7Б</span>.  
-                Уточнения по входу/этажу/парковке — в сообщениях после записи.
-              </p>
-
-              <div className="mt-5 grid grid-cols-1 gap-4 sm:grid-cols-2">
-                <div className="rounded-2xl border border-white/10 bg-black/20 p-4">
-                  <div className="text-sm font-semibold">Запись</div>
-                  <div className="mt-1 text-sm text-white/70">VK: напишите «КУРС»</div>
+        <div className="grid lg:grid-cols-2 gap-8">
+          <div className="relative rounded-3xl overflow-hidden border border-violet-500/20">
+            <img
+              src="https://images.unsplash.com/photo-1513326738677-b964603b136d?w=800&h=500&fit=crop"
+              alt="Москва"
+              className="w-full h-[300px] lg:h-full object-cover"
+            />
+            <div className="absolute inset-0 bg-gradient-to-t from-gray-950/80 via-gray-950/20 to-transparent" />
+            <div className="absolute bottom-6 left-6 right-6">
+              <div className="backdrop-blur-xl bg-gray-950/50 rounded-2xl p-5 border border-violet-500/20">
+                <div className="flex items-center gap-3 mb-3">
+                  <div className="w-10 h-10 rounded-xl bg-gradient-to-br from-violet-500 to-fuchsia-500 flex items-center justify-center text-white">
+                    📍
+                  </div>
+                  <div>
+                    <p className="text-white font-bold">Nail Master Studio</p>
+                    <p className="text-violet-300 text-sm">
+                      Берёзовая аллея 7Б
+                    </p>
+                  </div>
                 </div>
-                <div className="rounded-2xl border border-white/10 bg-black/20 p-4">
-                  <div className="text-sm font-semibold">Формат</div>
-                  <div className="mt-1 text-sm text-white/70">Очное обучение</div>
-                </div>
-              </div>
-
-              <div className="mt-6 flex flex-col gap-3 sm:flex-row">
-                <a
-                  href={VK_LINK}
-                  className="inline-flex flex-1 items-center justify-center rounded-2xl bg-gradient-to-r from-violet-500 to-fuchsia-500 px-6 py-3 text-sm font-semibold text-white transition hover:brightness-110"
-                >
-                  Открыть VK и записаться
-                </a>
-                <a
-                  href="#courses"
-                  className="inline-flex flex-1 items-center justify-center rounded-2xl border border-white/15 bg-white/5 px-6 py-3 text-sm font-semibold text-white/85 backdrop-blur transition hover:bg-white/10"
-                >
-                  Вернуться к курсам
-                </a>
               </div>
             </div>
+          </div>
 
-            <div className="relative overflow-hidden rounded-[28px] border border-white/10 bg-white/5 backdrop-blur">
-              <div className="absolute inset-0 bg-gradient-to-br from-sky-500/10 via-violet-500/10 to-fuchsia-500/10" />
-              <img
-                className="relative h-80 w-full object-cover md:h-[420px]"
-                src="https://source.unsplash.com/1200x900/?moscow,street,map"
-                alt="Локация в Москве (заглушка Unsplash)"
-              />
-              <div className="relative p-5">
-                <div className="text-sm font-semibold">Берёзовая аллея 7Б</div>
-                <div className="mt-1 text-xs text-white/65">Фото/карта — заглушка Unsplash</div>
-              </div>
+          <div className="backdrop-blur-xl bg-gray-900/40 rounded-3xl border border-violet-500/20 p-8">
+            <h3 className="text-xl font-bold text-white mb-6">
+              Как добраться
+            </h3>
+            <div className="space-y-5">
+              {[
+                {
+                  icon: "🚇",
+                  title: "На метро",
+                  desc: "Станция «Отрадное» или «Владыкино» — далее 10 минут пешком или 1 остановка на автобусе.",
+                },
+                {
+                  icon: "🚗",
+                  title: "На автомобиле",
+                  desc: "Берёзовая аллея 7Б, рядом есть бесплатная парковка во дворе и на прилегающих улицах.",
+                },
+                {
+                  icon: "🚌",
+                  title: "На автобусе",
+                  desc: "Остановка «Берёзовая аллея» — маршруты 605, 628. Студия в 2 минутах ходьбы.",
+                },
+              ].map((item, i) => (
+                <div
+                  key={i}
+                  className="flex items-start gap-4 p-4 rounded-xl bg-violet-500/5 border border-violet-500/10"
+                >
+                  <div className="w-10 h-10 rounded-xl bg-violet-500/10 flex items-center justify-center text-xl flex-shrink-0">
+                    {item.icon}
+                  </div>
+                  <div>
+                    <p className="text-white font-semibold text-sm">
+                      {item.title}
+                    </p>
+                    <p className="text-gray-400 text-sm mt-1">{item.desc}</p>
+                  </div>
+                </div>
+              ))}
+            </div>
+
+            <div className="mt-8 p-4 rounded-xl bg-gradient-to-r from-violet-500/10 to-fuchsia-500/10 border border-violet-500/20">
+              <p className="text-violet-300 text-sm font-medium mb-1">
+                🕐 Время работы студии
+              </p>
+              <p className="text-gray-400 text-sm">
+                Пн–Сб: 10:00 – 20:00 · Вс: по записи
+              </p>
             </div>
           </div>
         </div>
       </section>
 
       {/* Final CTA */}
-      <section className="relative border-t border-white/10">
-        <div className="mx-auto max-w-6xl px-4 py-14 md:px-6 md:py-20">
-          <div className="relative overflow-hidden rounded-[32px] border border-white/10 bg-white/5 p-8 backdrop-blur md:p-12">
-            <div className="absolute inset-0 bg-gradient-to-br from-violet-500/25 via-fuchsia-500/15 to-sky-500/15" />
-            <div className="relative grid grid-cols-1 items-center gap-8 lg:grid-cols-[1fr_360px]">
-              <div>
-                <h3 className="text-balance text-3xl font-semibold tracking-tight">
-                  Хотите программу и ближайшие даты?
-                </h3>
-                <p className="mt-3 text-sm leading-relaxed text-white/75 md:text-base">
-                  Нажмите кнопку и напишите в VK слово <span className="font-semibold text-white">«КУРС»</span>.
-                  Я отвечу и помогу выбрать формат: 7 дней или 1 день.
-                </p>
-              </div>
-
-              <div className="flex flex-col gap-3">
-                <a
-                  href={VK_LINK}
-                  className="inline-flex items-center justify-center rounded-2xl bg-gradient-to-r from-violet-500 to-fuchsia-500 px-8 py-4 text-sm font-semibold text-white transition hover:brightness-110"
-                >
-                  Записаться в VK
-                </a>
-                <div className="text-center text-xs text-white/60">
-                  Москва • Берёзовая аллея 7Б
-                </div>
-              </div>
-            </div>
+      <section className="relative z-10 max-w-4xl mx-auto px-4 py-20">
+        <div className="relative overflow-hidden rounded-3xl">
+          <div className="absolute inset-0 bg-gradient-to-br from-violet-600 via-fuchsia-600 to-violet-700" />
+          <div className="absolute inset-0 bg-[url('data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMjAwIiBoZWlnaHQ9IjIwMCIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj48ZGVmcz48cGF0dGVybiBpZD0iYSIgcGF0dGVyblVuaXRzPSJ1c2VyU3BhY2VPblVzZSIgd2lkdGg9IjQwIiBoZWlnaHQ9IjQwIiBwYXR0ZXJuVHJhbnNmb3JtPSJyb3RhdGUoNDUpIj48cGF0aCBkPSJNLTEwIDMwaDYwIiBzdHJva2U9InJnYmEoMjU1LDI1NSwyNTUsMC4wNSkiIHN0cm9rZS13aWR0aD0iMSIvPjwvcGF0dGVybj48L2RlZnM+PHJlY3QgZmlsbD0idXJsKCNhKSIgd2lkdGg9IjEwMCUiIGhlaWdodD0iMTAwJSIvPjwvc3ZnPg==')] opacity-50" />
+          <div className="relative px-8 py-16 md:py-20 text-center">
+            <h2 className="text-3xl md:text-4xl lg:text-5xl font-extrabold text-white mb-4">
+              Готовы начать?
+            </h2>
+            <p className="text-violet-100 text-lg md:text-xl mb-8 max-w-xl mx-auto">
+              Напишите <span className="font-bold text-white">«КУРС»</span> в
+              сообщения нашей группы, и мы подберём ближайшую дату обучения
+            </p>
+            <a
+              href={vkLink}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="inline-flex items-center justify-center px-10 py-5 rounded-full bg-white text-violet-700 font-bold text-lg hover:bg-violet-50 transition-all shadow-2xl shadow-violet-900/30"
+            >
+              Написать в VK
+              <svg
+                className="ml-3 w-5 h-5"
+                fill="none"
+                stroke="currentColor"
+                viewBox="0 0 24 24"
+              >
+                <path
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                  strokeWidth={2}
+                  d="M17 8l4 4m0 0l-4 4m4-4H3"
+                />
+              </svg>
+            </a>
+            <p className="text-violet-200/60 text-sm mt-6">
+              Ответим в течение 30 минут в рабочее время
+            </p>
           </div>
         </div>
       </section>
 
       {/* Footer */}
-      <footer className="border-t border-white/10 bg-[#060611]">
-        <div className="mx-auto max-w-6xl px-4 py-10 md:px-6">
-          <div className="grid grid-cols-1 gap-6 md:grid-cols-3">
+      <footer className="relative z-10 border-t border-violet-500/10">
+        <div className="max-w-7xl mx-auto px-4 py-12">
+          <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-8 mb-10">
             <div>
-              <div className="text-sm font-semibold">Елена • Paris Nail</div>
-              <div className="mt-2 text-sm text-white/65">
-                Очное обучение маникюру в Москве.  
-                Техника: жёсткий гель, архитектура, опил после материала.
+              <div className="flex items-center gap-2 mb-4">
+                <div className="w-9 h-9 rounded-lg bg-gradient-to-br from-violet-500 to-fuchsia-500 flex items-center justify-center text-white font-bold text-sm">
+                  NM
+                </div>
+                <span className="font-bold text-lg bg-gradient-to-r from-violet-300 to-fuchsia-300 bg-clip-text text-transparent">
+                  Nail Master
+                </span>
               </div>
+              <p className="text-gray-500 text-sm leading-relaxed">
+                Школа профессионального маникюра в Москве. Обучаем технике
+                жёсткого геля и авторскому опилу с 2014 года.
+              </p>
             </div>
+
             <div>
-              <div className="text-sm font-semibold">Адрес</div>
-              <div className="mt-2 text-sm text-white/65">Москва, Берёзовая аллея 7Б</div>
+              <h4 className="text-white font-semibold mb-4">Курсы</h4>
+              <ul className="space-y-2 text-sm text-gray-500">
+                <li>
+                  <a href="#courses" className="hover:text-violet-300 transition-colors">
+                    Топ-мастер маникюра · 7 дней
+                  </a>
+                </li>
+                <li>
+                  <a href="#courses" className="hover:text-violet-300 transition-colors">
+                    Повышение квалификации · 1 день
+                  </a>
+                </li>
+              </ul>
             </div>
+
             <div>
-              <div className="text-sm font-semibold">Контакты</div>
-              <div className="mt-2 flex flex-col gap-2 text-sm">
-                <a className="text-white/75 hover:text-white" href={VK_LINK}>
-                  VK: написать «КУРС»
-                </a>
-                <a className="text-white/50 hover:text-white/70" href="#">
-                  Политика конфиденциальности (заглушка)
-                </a>
-              </div>
+              <h4 className="text-white font-semibold mb-4">Контакты</h4>
+              <ul className="space-y-2 text-sm text-gray-500">
+                <li>📍 Москва, Берёзовая аллея 7Б</li>
+                <li>🕐 Пн–Сб: 10:00 – 20:00</li>
+                <li>
+                  <a
+                    href={vkLink}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="hover:text-violet-300 transition-colors"
+                  >
+                    💬 Написать в VK
+                  </a>
+                </li>
+              </ul>
+            </div>
+
+            <div>
+              <h4 className="text-white font-semibold mb-4">Информация</h4>
+              <ul className="space-y-2 text-sm text-gray-500">
+                <li>
+                  <a href="#" className="hover:text-violet-300 transition-colors">
+                    Политика конфиденциальности
+                  </a>
+                </li>
+                <li>
+                  <a href="#" className="hover:text-violet-300 transition-colors">
+                    Договор оферты
+                  </a>
+                </li>
+                <li>
+                  <a href="#" className="hover:text-violet-300 transition-colors">
+                    Реквизиты
+                  </a>
+                </li>
+              </ul>
             </div>
           </div>
 
-          <div className="mt-8 text-xs text-white/40">
-            © {new Date().getFullYear()} • Лендинг-шаблон. Фото: Unsplash (заглушки).
+          <div className="border-t border-violet-500/10 pt-6 flex flex-col sm:flex-row items-center justify-between gap-4 text-sm text-gray-600">
+            <p>© 2024 Nail Master. Все права защищены.</p>
+            <p>Москва, Берёзовая аллея 7Б</p>
           </div>
         </div>
       </footer>
 
       {/* Mobile fixed CTA */}
-      <div className="fixed bottom-4 left-0 right-0 z-50 px-4 md:hidden">
-        <div className="mx-auto max-w-md">
-          <a
-            href={VK_LINK}
-            className="flex items-center justify-center rounded-2xl bg-gradient-to-r from-violet-500 to-fuchsia-500 px-5 py-4 text-sm font-semibold text-white shadow-[0_16px_60px_rgba(167,139,250,0.25)]"
+      <div className="fixed bottom-0 left-0 right-0 z-50 md:hidden p-4 bg-gradient-to-t from-gray-950 via-gray-950/95 to-transparent">
+        <a
+          href={vkLink}
+          target="_blank"
+          rel="noopener noreferrer"
+          className="flex items-center justify-center w-full py-4 rounded-2xl bg-gradient-to-r from-violet-600 to-fuchsia-600 text-white font-bold text-base shadow-xl shadow-violet-500/30"
+        >
+          Записаться в VK
+          <svg
+            className="ml-2 w-5 h-5"
+            fill="none"
+            stroke="currentColor"
+            viewBox="0 0 24 24"
           >
-            Записаться в VK
-          </a>
-          <div className="mt-2 text-center text-[11px] text-white/55">
-            Напишите «КУРС» • Москва, Берёзовая аллея 7Б
-          </div>
-        </div>
+            <path
+              strokeLinecap="round"
+              strokeLinejoin="round"
+              strokeWidth={2}
+              d="M17 8l4 4m0 0l-4 4m4-4H3"
+            />
+          </svg>
+        </a>
       </div>
+
+      {/* Bottom padding for mobile fixed CTA */}
+      <div className="h-20 md:h-0" />
     </div>
   );
 }
